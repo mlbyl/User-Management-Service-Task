@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: User-Management-Service-Task
+  datasource:
+    url: jdbc:postgresql://localhost:9999/user-management-service-task
+    username: postgres
+    password: 12345678
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    liquibase:
+      enabled: true
+      change-log: classpath:/db/changelog/db.changelog-master.yaml
+
+
+server:
+  port: 8080
+
+
+
