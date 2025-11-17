@@ -1,0 +1,12 @@
+2025-11-17T20:00:15.526Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-7] c.m.u.AOP.ControllerLoggingAspect        : Controller method called: UserController.getAll
+2025-11-17T20:00:15.531Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-7] c.m.u.AOP.ServiceLoggingAspect           : Service method started: UserServiceImpl.getAll
+2025-11-17T20:00:15.873Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-7] c.m.u.AOP.ServiceLoggingAspect           : Service method failed: UserServiceImpl.getAll - Execution time: 341ms
+2025-11-17T20:00:15.875Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-7] c.m.u.AOP.ControllerLoggingAspect        : Controller method failed: UserController.getAll - Execution time: 345ms
+2025-11-17T20:00:15.880Z ERROR 1 --- [User-Management-Service-Task] [http-nio-8080-exec-7] c.m.u.exception.GlobalExceptionHandler   : Base exception occured: Type: NotFoundException, Message: No users found in database, Path: /api/user, Status: 404 NOT_FOUND
+2025-11-17T20:00:39.392Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-8] c.m.u.AOP.ControllerLoggingAspect        : Controller method called: UserController.createUser
+2025-11-17T20:00:39.394Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-8] c.m.u.AOP.ServiceLoggingAspect           : Service method started: UserServiceImpl.createUser
+2025-11-17T20:00:39.693Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-8] c.m.u.AOP.ServiceLoggingAspect           : Service method completed: UserServiceImpl.createUser - Execution time: 292ms
+2025-11-17T20:00:39.695Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-8] c.m.u.AOP.ControllerLoggingAspect        : Controller method executed successfully: UserController.createUser - Execution time: 301ms
+2025-11-17T20:01:35.912Z  INFO 1 --- [User-Management-Service-Task] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-11-17T20:01:35.919Z  INFO 1 --- [User-Management-Service-Task] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-11-17T20:01:35.926Z  INFO 1 --- [User-Management-Service-Task] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'

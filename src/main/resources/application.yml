@@ -1,8 +1,11 @@
+server:
+  port: 8080
+
 spring:
   application:
     name: User-Management-Service-Task
   datasource:
-    url: jdbc:postgresql://localhost:9999/user-management-service-task
+    url: jdbc:postgresql://postgres:5432/user-management-service-task
     username: postgres
     password: 12345678
   jpa:
@@ -10,15 +13,28 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: none # Liquibase kullanıldığı için none olarak ayarlandı
     show-sql: true
     liquibase:
       enabled: true
       change-log: classpath:/db/changelog/db.changelog-master.yaml
 
+logging:
+  level:
+    root: INFO
+#    com.mlbyl.usermanagementservicetask: DEBUG # Kendi paketini DEBUG seviyesinde
+    org.springframework.web: WARN
+    org.springframework.web.servlet: WARN
+    org.apache.catalina: WARN
+    org.apache.tomcat: WARN
+    org.hibernate: WARN
+    com.zaxxer.hikari: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: logs/user-management.log
+  exception-conversion-word: "%xEx{short}"
 
-server:
-  port: 8080
 
 
 
