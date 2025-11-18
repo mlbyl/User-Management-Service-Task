@@ -1,8 +1,6 @@
 package com.mlbyl.usermanagementservicetask.controller;
 
-import com.mlbyl.usermanagementservicetask.dto.UserCreateRequest;
-import com.mlbyl.usermanagementservicetask.dto.UserResponse;
-import com.mlbyl.usermanagementservicetask.dto.UserUpdateRequest;
+import com.mlbyl.usermanagementservicetask.dto.*;
 import com.mlbyl.usermanagementservicetask.service.UserService;
 import com.mlbyl.usermanagementservicetask.utils.Result.Result;
 import com.mlbyl.usermanagementservicetask.utils.constant.SuccessMessage;
@@ -36,8 +34,10 @@ public class UserController {
     }
 
     @GetMapping()
-    public ResponseEntity<Result<List<UserResponse>>> getAll() {
-        List<UserResponse> userResponse = userService.getAll();
+    public ResponseEntity<Result<PageResponse<UserResponse>>> getAll(UserFilterRequest filterRequest,
+                                                                           @RequestParam(defaultValue = "0") int page,
+                                                                           @RequestParam(defaultValue = "10") int size) {
+        PageResponse<UserResponse> userResponse = userService.getAll(filterRequest, page, size);
         return ResponseEntity.ok(
                 Result.success(userResponse, SuccessMessage.ALL_USERS_RETRIEVED_SUCCESSFULLY.getMessage()));
     }

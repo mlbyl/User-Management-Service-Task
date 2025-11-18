@@ -23,6 +23,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Result<?>> handleBaseException(BaseException baseException, WebRequest request) {
         log.error("Base exception occured: Type: {}, Message: {}, Path: {}, Status: {}", baseException.getClass().getSimpleName(),
                 baseException.getMessage(), extractPathPayload(request), baseException.getStatus());
+
         return ResponseEntity.status(baseException.getStatus())
                 .body(Result.failure(baseException, extractPathPayload(request)));
     }
@@ -48,6 +49,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Result<?>> handleValidationException(
             MethodArgumentNotValidException exception, WebRequest request
     ) {
+
         List<String> errors = exception.getBindingResult().getFieldErrors()
                 .stream()
                 .map(error -> error.getField() + ": " + error.getDefaultMessage())

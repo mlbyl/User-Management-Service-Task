@@ -10,12 +10,8 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SwaggerConfig {
-    public SwaggerConfig() {
-        System.out.println("!!! SwaggerConfig constructor called !!!");
-    }
-
     @Bean
-    public OpenAPI openAPI() {  // Əvvəlki "customOpenAPI" yerinə "openAPI"
+    public OpenAPI openAPI() {
         System.out.println("!!! openAPI bean is being created !!!");
         return new OpenAPI()
                 .info(new Info()

@@ -18,14 +18,14 @@ public class ControllerLoggingAspect {
         String methodName = joinPoint.getSignature().getName();
         String className = joinPoint.getTarget().getClass().getSimpleName();
 
-        // Request logging
+
         log.info("Controller method called: {}.{}", className, methodName);
         log.debug("Arguments: {}", Arrays.toString(joinPoint.getArgs()));
 
         long startTime = System.currentTimeMillis();
 
         try {
-            Object result = joinPoint.proceed();  // Metodu çalıştır
+            Object result = joinPoint.proceed();
 
             long executionTime = System.currentTimeMillis() - startTime;
             log.info("Controller method executed successfully: {}.{} - Execution time: {}ms",
@@ -36,7 +36,7 @@ public class ControllerLoggingAspect {
             long executionTime = System.currentTimeMillis() - startTime;
             log.info("Controller method failed: {}.{} - Execution time: {}ms",
                     className, methodName, executionTime);
-            throw e;  // Exception'ı tekrar fırlat
+            throw e;
         }
     }
 }

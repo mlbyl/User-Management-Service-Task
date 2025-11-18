@@ -1,17 +1,20 @@
 package com.mlbyl.usermanagementservicetask.service;
 
-import com.mlbyl.usermanagementservicetask.dto.UserCreateRequest;
-import com.mlbyl.usermanagementservicetask.dto.UserResponse;
-import com.mlbyl.usermanagementservicetask.dto.UserUpdateRequest;
+import com.mlbyl.usermanagementservicetask.dto.*;
 import com.mlbyl.usermanagementservicetask.entity.User;
 import com.mlbyl.usermanagementservicetask.enums.UserRole;
 import com.mlbyl.usermanagementservicetask.exception.BusinessException;
 import com.mlbyl.usermanagementservicetask.exception.NotFoundException;
 import com.mlbyl.usermanagementservicetask.mapper.UserMapper;
 import com.mlbyl.usermanagementservicetask.repository.UserRepository;
+import com.mlbyl.usermanagementservicetask.specification.UserSpecification;
 import com.mlbyl.usermanagementservicetask.utils.constant.ErrorCode;
 import com.mlbyl.usermanagementservicetask.utils.constant.ErrorMessage;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -48,14 +51,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserResponse> getAll() {
-        List<User> allUsers = userRepository.findAll();
-        if (allUsers.isEmpty()) {
+    public PageResponse<UserResponse> getAll(UserFilterRequest filterRequest, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+
+        Specification<User> spec = UserSpecification.build(filterRequest);
+
+        Page<User> users = userRepository.findAll(spec, pageable);
+
+        if (users.isEmpty()) {
             throw new NotFoundException(ErrorMessage.NO_USERS_FOUND_IN_DATABASE.getMessage(),
                     ErrorCode.USER_NOT_FOUND.name());
         }
 
-        return UserMapper.toResponse(allUsers);
+        return UserMapper.toPageResponse(users);
     }
 
     @Override

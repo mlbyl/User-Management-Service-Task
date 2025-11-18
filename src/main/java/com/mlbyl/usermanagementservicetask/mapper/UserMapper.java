@@ -1,9 +1,11 @@
 package com.mlbyl.usermanagementservicetask.mapper;
 
+import com.mlbyl.usermanagementservicetask.dto.PageResponse;
 import com.mlbyl.usermanagementservicetask.dto.UserCreateRequest;
 import com.mlbyl.usermanagementservicetask.dto.UserResponse;
 import com.mlbyl.usermanagementservicetask.dto.UserUpdateRequest;
 import com.mlbyl.usermanagementservicetask.entity.User;
+import org.springframework.data.domain.Page;
 
 import java.util.Collections;
 import java.util.List;
@@ -51,6 +53,20 @@ public class UserMapper {
 
         return users.stream().map(u -> toResponse(u)).collect(Collectors.toList());
 
+    }
+
+    public static PageResponse<UserResponse> toPageResponse(Page<User> userPage) {
+        List<UserResponse> content = userPage.getContent().stream()
+                .map(c -> toResponse(c))
+                .toList();
+
+        return PageResponse.<UserResponse>builder()
+                .content(content)
+                .pageNumber(userPage.getNumber())
+                .pageSize(userPage.getSize())
+                .totalElements(userPage.getTotalElements())
+                .totalPages(userPage.getTotalPages())
+                .build();
     }
 
 }

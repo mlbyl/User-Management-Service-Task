@@ -1,9 +1,6 @@
 package com.mlbyl.usermanagementservicetask.dto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,6 +25,7 @@ public class UserUpdateRequest {
     @Size(min = 8, max = 64, message = "Password must be between 8 and 64 characters long")
     private String password;
 
+    @Pattern(regexp = "\\+?[0-9]{7,15}",message = "Phone number format is invalid")
     @NotBlank(message = "Phone number cannot be blank")
     private String phoneNumber;
 

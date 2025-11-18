@@ -1,8 +1,6 @@
 package com.mlbyl.usermanagementservicetask.service;
 
-import com.mlbyl.usermanagementservicetask.dto.UserCreateRequest;
-import com.mlbyl.usermanagementservicetask.dto.UserResponse;
-import com.mlbyl.usermanagementservicetask.dto.UserUpdateRequest;
+import com.mlbyl.usermanagementservicetask.dto.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -12,7 +10,7 @@ public interface UserService {
 
     UserResponse getUserById(UUID userId);
 
-    List<UserResponse> getAll();
+    PageResponse<UserResponse> getAll(UserFilterRequest request, int page, int size);
 
     UserResponse udpateUser(UserUpdateRequest request, UUID userId);
 
