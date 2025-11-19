@@ -18,11 +18,35 @@ spring:
     liquibase:
       enabled: true
       change-log: classpath:/db/changelog/db.changelog-master.yaml
+  kafka:
+    bootstrap-servers: kafka:9092
+    consumer:
+      group-id: notification-group-v2
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+  mail:
+    host: localhost
+    port: 1025
+    username:
+    password:
+    properties:
+      mail:
+        smtp:
+          auth: false
+          starttls:
+            enable: false
+
+
 
 logging:
   level:
     root: INFO
     org.springframework.web: WARN
+    org.apache.kafka: INFO
     org.springframework.web.servlet: WARN
     org.apache.catalina: WARN
     org.apache.tomcat: WARN
@@ -33,7 +57,3 @@ logging:
   file:
     name: logs/user-management.log
   exception-conversion-word: "%xEx{short}"
-
-
-
-

@@ -1,181 +1,144 @@
-2025-11-18T09:10:12.759Z  INFO 1 --- [User-Management-Service-Task] [main] m.u.UserManagementServiceTaskApplication : Starting UserManagementServiceTaskApplication v0.0.1-SNAPSHOT using Java 21.0.9 with PID 1 (/app/User-Management-Service-Task.jar started by root in /app)
-2025-11-18T09:10:12.787Z  INFO 1 --- [User-Management-Service-Task] [main] m.u.UserManagementServiceTaskApplication : No active profile set, falling back to 1 default profile: "default"
-2025-11-18T09:10:14.170Z  INFO 1 --- [User-Management-Service-Task] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-11-18T09:10:14.306Z  INFO 1 --- [User-Management-Service-Task] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 99 ms. Found 1 JPA repository interface.
-2025-11-18T09:10:15.619Z  INFO 1 --- [User-Management-Service-Task] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-11-18T09:10:15.764Z  INFO 1 --- [User-Management-Service-Task] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2887 ms
-2025-11-18T09:10:16.803Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.database                       : Set default schema name to public
-2025-11-18T09:10:17.405Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.changelog                      : Reading from public.databasechangelog
-2025-11-18T09:10:17.485Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.ui                             : Database is up to date, no changesets to execute
-2025-11-18T09:10:17.490Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.changelog                      : Reading from public.databasechangelog
-2025-11-18T09:10:17.527Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : UPDATE SUMMARY
-2025-11-18T09:10:17.529Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : Run:                          0
-2025-11-18T09:10:17.531Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : Previously run:               1
-2025-11-18T09:10:17.533Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : Filtered out:                 0
-2025-11-18T09:10:17.534Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : -------------------------------
-2025-11-18T09:10:17.534Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : Total change sets:            1
-2025-11-18T09:10:17.536Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : Update summary generated
-2025-11-18T09:10:17.541Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.command                        : Command execution complete
-2025-11-18T09:10:20.115Z  INFO 1 --- [User-Management-Service-Task] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-11-18T09:10:20.264Z  WARN 1 --- [User-Management-Service-Task] [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-11-18T09:10:21.823Z  INFO 1 --- [User-Management-Service-Task] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-11-18T09:10:23.112Z  WARN 1 --- [User-Management-Service-Task] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-11-18T09:10:24.281Z  INFO 1 --- [User-Management-Service-Task] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2025-11-18T09:10:24.295Z  INFO 1 --- [User-Management-Service-Task] [main] m.u.UserManagementServiceTaskApplication : Started UserManagementServiceTaskApplication in 12.543 seconds (process running for 13.662)
-2025-11-18T09:10:33.642Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-4] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 639 ms
-2025-11-18T09:11:02.012Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-5] c.m.u.AOP.ControllerLoggingAspect        : Controller method called: UserController.getAll
-2025-11-18T09:11:02.014Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-5] c.m.u.AOP.ServiceLoggingAspect           : Service method started: UserServiceImpl.getAll
-2025-11-18T09:11:02.334Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-5] c.m.u.AOP.ServiceLoggingAspect           : Service method failed: UserServiceImpl.getAll - Execution time: 319ms
-2025-11-18T09:11:02.336Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-5] c.m.u.AOP.ControllerLoggingAspect        : Controller method failed: UserController.getAll - Execution time: 323ms
-2025-11-18T09:11:02.342Z ERROR 1 --- [User-Management-Service-Task] [http-nio-8080-exec-5] c.m.u.exception.GlobalExceptionHandler   : Base exception occured: Type: NotFoundException, Message: No users found in database, Path: /api/user, Status: 404 NOT_FOUND
-2025-11-18T09:11:18.149Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-6] c.m.u.AOP.ControllerLoggingAspect        : Controller method called: UserController.getAll
-2025-11-18T09:11:18.163Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-6] c.m.u.AOP.ServiceLoggingAspect           : Service method started: UserServiceImpl.getAll
-2025-11-18T09:11:18.213Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-6] c.m.u.AOP.ServiceLoggingAspect           : Service method completed: UserServiceImpl.getAll - Execution time: 47ms
-2025-11-18T09:11:18.215Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-6] c.m.u.AOP.ControllerLoggingAspect        : Controller method executed successfully: UserController.getAll - Execution time: 52ms
-2025-11-18T09:12:28.981Z  INFO 1 --- [User-Management-Service-Task] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
-2025-11-18T09:12:28.986Z  INFO 1 --- [User-Management-Service-Task] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
-2025-11-18T09:12:28.994Z  INFO 1 --- [User-Management-Service-Task] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-11-18T11:50:16.105Z  INFO 1 --- [User-Management-Service-Task] [main] m.u.UserManagementServiceTaskApplication : Starting UserManagementServiceTaskApplication v0.0.1-SNAPSHOT using Java 21.0.9 with PID 1 (/app/User-Management-Service-Task.jar started by root in /app)
-2025-11-18T11:50:16.111Z  INFO 1 --- [User-Management-Service-Task] [main] m.u.UserManagementServiceTaskApplication : No active profile set, falling back to 1 default profile: "default"
-2025-11-18T11:50:17.355Z  INFO 1 --- [User-Management-Service-Task] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-11-18T11:50:17.455Z  INFO 1 --- [User-Management-Service-Task] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 78 ms. Found 1 JPA repository interface.
-2025-11-18T11:50:18.711Z  INFO 1 --- [User-Management-Service-Task] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-11-18T11:50:18.842Z  INFO 1 --- [User-Management-Service-Task] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2665 ms
-2025-11-18T11:50:19.613Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.database                       : Set default schema name to public
-2025-11-18T11:50:20.136Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.changelog                      : Reading from public.databasechangelog
-2025-11-18T11:50:20.198Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.ui                             : Database is up to date, no changesets to execute
-2025-11-18T11:50:20.204Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.changelog                      : Reading from public.databasechangelog
-2025-11-18T11:50:20.213Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : UPDATE SUMMARY
-2025-11-18T11:50:20.214Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : Run:                          0
-2025-11-18T11:50:20.215Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : Previously run:               1
-2025-11-18T11:50:20.215Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : Filtered out:                 0
-2025-11-18T11:50:20.216Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : -------------------------------
-2025-11-18T11:50:20.217Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : Total change sets:            1
-2025-11-18T11:50:20.219Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : Update summary generated
-2025-11-18T11:50:20.221Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.command                        : Command execution complete
-2025-11-18T11:50:22.553Z  INFO 1 --- [User-Management-Service-Task] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-11-18T11:50:22.623Z  WARN 1 --- [User-Management-Service-Task] [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-11-18T11:50:23.974Z  INFO 1 --- [User-Management-Service-Task] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-11-18T11:50:25.165Z  WARN 1 --- [User-Management-Service-Task] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-11-18T11:50:26.242Z  INFO 1 --- [User-Management-Service-Task] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2025-11-18T11:50:26.257Z  INFO 1 --- [User-Management-Service-Task] [main] m.u.UserManagementServiceTaskApplication : Started UserManagementServiceTaskApplication in 11.011 seconds (process running for 12.03)
-2025-11-18T11:52:07.542Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-1] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 867 ms
-2025-11-18T11:52:07.944Z ERROR 1 --- [User-Management-Service-Task] [http-nio-8080-exec-2] c.m.u.exception.GlobalExceptionHandler   : Unexpected error occured: Type: InternalServerErrorException, Message: Internal server error occured, Path: /favicon.ico, Status: 500 INTERNAL_SERVER_ERROR
-2025-11-18T11:53:12.079Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-3] c.m.u.AOP.ControllerLoggingAspect        : Controller method called: UserController.getAll
-2025-11-18T11:53:12.083Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-3] c.m.u.AOP.ServiceLoggingAspect           : Service method started: UserServiceImpl.getAll
-2025-11-18T11:53:12.696Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-3] c.m.u.AOP.ServiceLoggingAspect           : Service method completed: UserServiceImpl.getAll - Execution time: 612ms
-2025-11-18T11:53:12.698Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-3] c.m.u.AOP.ControllerLoggingAspect        : Controller method executed successfully: UserController.getAll - Execution time: 616ms
-2025-11-18T11:53:12.952Z ERROR 1 --- [User-Management-Service-Task] [http-nio-8080-exec-4] c.m.u.exception.GlobalExceptionHandler   : Unexpected error occured: Type: InternalServerErrorException, Message: Internal server error occured, Path: /favicon.ico, Status: 500 INTERNAL_SERVER_ERROR
-2025-11-18T11:53:35.581Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-5] c.m.u.AOP.ControllerLoggingAspect        : Controller method called: UserController.getAll
-2025-11-18T11:53:35.582Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-5] c.m.u.AOP.ServiceLoggingAspect           : Service method started: UserServiceImpl.getAll
-2025-11-18T11:53:35.603Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-5] c.m.u.AOP.ServiceLoggingAspect           : Service method completed: UserServiceImpl.getAll - Execution time: 19ms
-2025-11-18T11:53:35.604Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-5] c.m.u.AOP.ControllerLoggingAspect        : Controller method executed successfully: UserController.getAll - Execution time: 22ms
-2025-11-18T11:53:35.721Z ERROR 1 --- [User-Management-Service-Task] [http-nio-8080-exec-6] c.m.u.exception.GlobalExceptionHandler   : Unexpected error occured: Type: InternalServerErrorException, Message: Internal server error occured, Path: /favicon.ico, Status: 500 INTERNAL_SERVER_ERROR
-2025-11-18T11:53:41.733Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-7] c.m.u.AOP.ControllerLoggingAspect        : Controller method called: UserController.getAll
-2025-11-18T11:53:41.735Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-7] c.m.u.AOP.ServiceLoggingAspect           : Service method started: UserServiceImpl.getAll
-2025-11-18T11:53:41.752Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-7] c.m.u.AOP.ServiceLoggingAspect           : Service method failed: UserServiceImpl.getAll - Execution time: 15ms
-2025-11-18T11:53:41.753Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-7] c.m.u.AOP.ControllerLoggingAspect        : Controller method failed: UserController.getAll - Execution time: 18ms
-2025-11-18T11:53:41.759Z ERROR 1 --- [User-Management-Service-Task] [http-nio-8080-exec-7] c.m.u.exception.GlobalExceptionHandler   : Base exception occured: Type: NotFoundException, Message: No users found in database, Path: /api/user, Status: 404 NOT_FOUND
-2025-11-18T11:53:41.862Z ERROR 1 --- [User-Management-Service-Task] [http-nio-8080-exec-8] c.m.u.exception.GlobalExceptionHandler   : Unexpected error occured: Type: InternalServerErrorException, Message: Internal server error occured, Path: /favicon.ico, Status: 500 INTERNAL_SERVER_ERROR
-2025-11-18T11:54:20.140Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-9] c.m.u.AOP.ControllerLoggingAspect        : Controller method called: UserController.getAll
-2025-11-18T11:54:20.142Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-9] c.m.u.AOP.ServiceLoggingAspect           : Service method started: UserServiceImpl.getAll
-2025-11-18T11:54:20.154Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-9] c.m.u.AOP.ServiceLoggingAspect           : Service method failed: UserServiceImpl.getAll - Execution time: 12ms
-2025-11-18T11:54:20.155Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-9] c.m.u.AOP.ControllerLoggingAspect        : Controller method failed: UserController.getAll - Execution time: 14ms
-2025-11-18T11:54:20.157Z ERROR 1 --- [User-Management-Service-Task] [http-nio-8080-exec-9] c.m.u.exception.GlobalExceptionHandler   : Base exception occured: Type: NotFoundException, Message: No users found in database, Path: /api/user, Status: 404 NOT_FOUND
-2025-11-18T11:54:20.264Z ERROR 1 --- [User-Management-Service-Task] [http-nio-8080-exec-10] c.m.u.exception.GlobalExceptionHandler   : Unexpected error occured: Type: InternalServerErrorException, Message: Internal server error occured, Path: /favicon.ico, Status: 500 INTERNAL_SERVER_ERROR
-2025-11-18T11:54:26.430Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-1] c.m.u.AOP.ControllerLoggingAspect        : Controller method called: UserController.getAll
-2025-11-18T11:54:26.431Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-1] c.m.u.AOP.ServiceLoggingAspect           : Service method started: UserServiceImpl.getAll
-2025-11-18T11:54:26.446Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-1] c.m.u.AOP.ServiceLoggingAspect           : Service method completed: UserServiceImpl.getAll - Execution time: 13ms
-2025-11-18T11:54:26.448Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-1] c.m.u.AOP.ControllerLoggingAspect        : Controller method executed successfully: UserController.getAll - Execution time: 17ms
-2025-11-18T11:54:26.554Z ERROR 1 --- [User-Management-Service-Task] [http-nio-8080-exec-2] c.m.u.exception.GlobalExceptionHandler   : Unexpected error occured: Type: InternalServerErrorException, Message: Internal server error occured, Path: /favicon.ico, Status: 500 INTERNAL_SERVER_ERROR
-2025-11-18T11:55:22.452Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-3] c.m.u.AOP.ControllerLoggingAspect        : Controller method called: UserController.getAll
-2025-11-18T11:55:22.453Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-3] c.m.u.AOP.ServiceLoggingAspect           : Service method started: UserServiceImpl.getAll
-2025-11-18T11:55:22.467Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-3] c.m.u.AOP.ServiceLoggingAspect           : Service method completed: UserServiceImpl.getAll - Execution time: 13ms
-2025-11-18T11:55:22.468Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-3] c.m.u.AOP.ControllerLoggingAspect        : Controller method executed successfully: UserController.getAll - Execution time: 15ms
-2025-11-18T11:55:22.597Z ERROR 1 --- [User-Management-Service-Task] [http-nio-8080-exec-4] c.m.u.exception.GlobalExceptionHandler   : Unexpected error occured: Type: InternalServerErrorException, Message: Internal server error occured, Path: /favicon.ico, Status: 500 INTERNAL_SERVER_ERROR
-2025-11-18T11:55:45.491Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-5] c.m.u.AOP.ControllerLoggingAspect        : Controller method called: UserController.getAll
-2025-11-18T11:55:45.492Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-5] c.m.u.AOP.ServiceLoggingAspect           : Service method started: UserServiceImpl.getAll
-2025-11-18T11:55:45.507Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-5] c.m.u.AOP.ServiceLoggingAspect           : Service method completed: UserServiceImpl.getAll - Execution time: 14ms
-2025-11-18T11:55:45.508Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-5] c.m.u.AOP.ControllerLoggingAspect        : Controller method executed successfully: UserController.getAll - Execution time: 16ms
-2025-11-18T11:55:45.679Z ERROR 1 --- [User-Management-Service-Task] [http-nio-8080-exec-6] c.m.u.exception.GlobalExceptionHandler   : Unexpected error occured: Type: InternalServerErrorException, Message: Internal server error occured, Path: /favicon.ico, Status: 500 INTERNAL_SERVER_ERROR
-2025-11-18T12:17:25.448Z  INFO 1 --- [User-Management-Service-Task] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
-2025-11-18T12:17:25.466Z  INFO 1 --- [User-Management-Service-Task] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
-2025-11-18T12:17:25.494Z  INFO 1 --- [User-Management-Service-Task] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-11-18T12:25:36.495Z  INFO 1 --- [User-Management-Service-Task] [main] m.u.UserManagementServiceTaskApplication : Starting UserManagementServiceTaskApplication v0.0.1-SNAPSHOT using Java 21.0.9 with PID 1 (/app/User-Management-Service-Task.jar started by root in /app)
-2025-11-18T12:25:36.501Z  INFO 1 --- [User-Management-Service-Task] [main] m.u.UserManagementServiceTaskApplication : No active profile set, falling back to 1 default profile: "default"
-2025-11-18T12:25:37.861Z  INFO 1 --- [User-Management-Service-Task] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-11-18T12:25:38.050Z  INFO 1 --- [User-Management-Service-Task] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 169 ms. Found 1 JPA repository interface.
-2025-11-18T12:25:39.664Z  INFO 1 --- [User-Management-Service-Task] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-11-18T12:25:39.794Z  INFO 1 --- [User-Management-Service-Task] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3218 ms
-2025-11-18T12:25:40.843Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.database                       : Set default schema name to public
-2025-11-18T12:25:41.513Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.changelog                      : Reading from public.databasechangelog
-2025-11-18T12:25:41.580Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.ui                             : Database is up to date, no changesets to execute
-2025-11-18T12:25:41.583Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.changelog                      : Reading from public.databasechangelog
-2025-11-18T12:25:41.644Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : UPDATE SUMMARY
-2025-11-18T12:25:41.646Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : Run:                          0
-2025-11-18T12:25:41.647Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : Previously run:               1
-2025-11-18T12:25:41.648Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : Filtered out:                 0
-2025-11-18T12:25:41.650Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : -------------------------------
-2025-11-18T12:25:41.651Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : Total change sets:            1
-2025-11-18T12:25:41.656Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : Update summary generated
-2025-11-18T12:25:41.660Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.command                        : Command execution complete
-2025-11-18T12:25:44.186Z  INFO 1 --- [User-Management-Service-Task] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-11-18T12:25:44.277Z  WARN 1 --- [User-Management-Service-Task] [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-11-18T12:25:45.698Z  INFO 1 --- [User-Management-Service-Task] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-11-18T12:25:46.965Z  WARN 1 --- [User-Management-Service-Task] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-11-18T12:25:48.123Z  INFO 1 --- [User-Management-Service-Task] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2025-11-18T12:25:48.155Z  INFO 1 --- [User-Management-Service-Task] [main] m.u.UserManagementServiceTaskApplication : Started UserManagementServiceTaskApplication in 12.704 seconds (process running for 13.753)
-2025-11-18T12:26:29.613Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-4] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 623 ms
-2025-11-18T12:26:36.862Z ERROR 1 --- [User-Management-Service-Task] [http-nio-8080-exec-5] c.m.u.exception.GlobalExceptionHandler   : Validation exception occured: Type: ValidationException, Message: Validation error occured, Path: [email: must be a well-formed email address], Status:/api/user
-2025-11-18T12:26:51.455Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-6] c.m.u.AOP.ControllerLoggingAspect        : Controller method called: UserController.createUser
-2025-11-18T12:26:51.459Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-6] c.m.u.AOP.ServiceLoggingAspect           : Service method started: UserServiceImpl.createUser
-2025-11-18T12:26:51.675Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-6] c.m.u.AOP.ServiceLoggingAspect           : Service method failed: UserServiceImpl.createUser - Execution time: 213ms
-2025-11-18T12:26:51.676Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-6] c.m.u.AOP.ControllerLoggingAspect        : Controller method failed: UserController.createUser - Execution time: 218ms
-2025-11-18T12:26:51.678Z ERROR 1 --- [User-Management-Service-Task] [http-nio-8080-exec-6] c.m.u.exception.GlobalExceptionHandler   : Base exception occured: Type: BusinessException, Message: Email already taken, Path: /api/user, Status: 409 CONFLICT
-2025-11-18T12:26:56.928Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-7] c.m.u.AOP.ControllerLoggingAspect        : Controller method called: UserController.createUser
-2025-11-18T12:26:56.929Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-7] c.m.u.AOP.ServiceLoggingAspect           : Service method started: UserServiceImpl.createUser
-2025-11-18T12:26:57.178Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-7] c.m.u.AOP.ServiceLoggingAspect           : Service method failed: UserServiceImpl.createUser - Execution time: 248ms
-2025-11-18T12:26:57.180Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-7] c.m.u.AOP.ControllerLoggingAspect        : Controller method failed: UserController.createUser - Execution time: 251ms
-2025-11-18T12:26:57.182Z ERROR 1 --- [User-Management-Service-Task] [http-nio-8080-exec-7] c.m.u.exception.GlobalExceptionHandler   : Unexpected error occured: Type: InternalServerErrorException, Message: Internal server error occured, Path: /api/user, Status: 500 INTERNAL_SERVER_ERROR
-2025-11-18T12:30:14.978Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-8] c.m.u.AOP.ControllerLoggingAspect        : Controller method called: UserController.getAll
-2025-11-18T12:30:14.981Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-8] c.m.u.AOP.ServiceLoggingAspect           : Service method started: UserServiceImpl.getAll
-2025-11-18T12:30:15.075Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-8] c.m.u.AOP.ServiceLoggingAspect           : Service method completed: UserServiceImpl.getAll - Execution time: 93ms
-2025-11-18T12:30:15.078Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-8] c.m.u.AOP.ControllerLoggingAspect        : Controller method executed successfully: UserController.getAll - Execution time: 97ms
-2025-11-18T12:30:15.380Z ERROR 1 --- [User-Management-Service-Task] [http-nio-8080-exec-9] c.m.u.exception.GlobalExceptionHandler   : Unexpected error occured: Type: InternalServerErrorException, Message: Internal server error occured, Path: /favicon.ico, Status: 500 INTERNAL_SERVER_ERROR
-2025-11-18T12:35:04.662Z  INFO 1 --- [User-Management-Service-Task] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
-2025-11-18T12:35:04.680Z  INFO 1 --- [User-Management-Service-Task] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
-2025-11-18T12:35:04.698Z  INFO 1 --- [User-Management-Service-Task] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-11-18T12:36:52.113Z  INFO 1 --- [User-Management-Service-Task] [main] m.u.UserManagementServiceTaskApplication : Starting UserManagementServiceTaskApplication v0.0.1-SNAPSHOT using Java 21.0.9 with PID 1 (/app/User-Management-Service-Task.jar started by root in /app)
-2025-11-18T12:36:52.121Z  INFO 1 --- [User-Management-Service-Task] [main] m.u.UserManagementServiceTaskApplication : No active profile set, falling back to 1 default profile: "default"
-2025-11-18T12:36:53.463Z  INFO 1 --- [User-Management-Service-Task] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-11-18T12:36:53.564Z  INFO 1 --- [User-Management-Service-Task] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 80 ms. Found 1 JPA repository interface.
-2025-11-18T12:36:54.742Z  INFO 1 --- [User-Management-Service-Task] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-11-18T12:36:54.857Z  INFO 1 --- [User-Management-Service-Task] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2658 ms
-2025-11-18T12:36:55.705Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.database                       : Set default schema name to public
-2025-11-18T12:36:56.191Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.changelog                      : Reading from public.databasechangelog
-2025-11-18T12:36:56.258Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.ui                             : Database is up to date, no changesets to execute
-2025-11-18T12:36:56.262Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.changelog                      : Reading from public.databasechangelog
-2025-11-18T12:36:56.274Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : UPDATE SUMMARY
-2025-11-18T12:36:56.274Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : Run:                          0
-2025-11-18T12:36:56.275Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : Previously run:               1
-2025-11-18T12:36:56.276Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : Filtered out:                 0
-2025-11-18T12:36:56.277Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : -------------------------------
-2025-11-18T12:36:56.278Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : Total change sets:            1
-2025-11-18T12:36:56.279Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : Update summary generated
-2025-11-18T12:36:56.282Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.command                        : Command execution complete
-2025-11-18T12:36:58.595Z  INFO 1 --- [User-Management-Service-Task] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-11-18T12:36:58.669Z  WARN 1 --- [User-Management-Service-Task] [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-11-18T12:37:00.115Z  INFO 1 --- [User-Management-Service-Task] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-11-18T12:37:01.315Z  WARN 1 --- [User-Management-Service-Task] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-11-18T12:37:02.332Z  INFO 1 --- [User-Management-Service-Task] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2025-11-18T12:37:02.348Z  INFO 1 --- [User-Management-Service-Task] [main] m.u.UserManagementServiceTaskApplication : Started UserManagementServiceTaskApplication in 11.134 seconds (process running for 12.133)
-2025-11-18T12:37:19.226Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-4] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 702 ms
-2025-11-18T12:37:43.217Z ERROR 1 --- [User-Management-Service-Task] [http-nio-8080-exec-5] c.m.u.exception.GlobalExceptionHandler   : Validation exception occured: Type: ValidationException, Message: Validation error occured, Path: [email: must be a well-formed email address], Status:/api/user
-2025-11-18T12:38:09.716Z ERROR 1 --- [User-Management-Service-Task] [http-nio-8080-exec-6] c.m.u.exception.GlobalExceptionHandler   : Validation exception occured: Type: ValidationException, Message: Validation error occured, Path: [phoneNumber: Phone number format is invalid], Status:/api/user
-2025-11-18T12:38:16.001Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-7] c.m.u.AOP.ControllerLoggingAspect        : Controller method called: UserController.createUser
-2025-11-18T12:38:16.005Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-7] c.m.u.AOP.ServiceLoggingAspect           : Service method started: UserServiceImpl.createUser
-2025-11-18T12:38:16.383Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-7] c.m.u.AOP.ServiceLoggingAspect           : Service method completed: UserServiceImpl.createUser - Execution time: 377ms
-2025-11-18T12:38:16.385Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-7] c.m.u.AOP.ControllerLoggingAspect        : Controller method executed successfully: UserController.createUser - Execution time: 381ms
-2025-11-18T12:38:50.166Z  INFO 1 --- [User-Management-Service-Task] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
-2025-11-18T12:38:50.171Z  INFO 1 --- [User-Management-Service-Task] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
-2025-11-18T12:38:50.179Z  INFO 1 --- [User-Management-Service-Task] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-11-19T20:05:53.391Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-10] c.m.u.AOP.ControllerLoggingAspect        : Controller method called: UserController.getAll
+2025-11-19T20:05:53.394Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-10] c.m.u.AOP.ServiceLoggingAspect           : Service method started: UserServiceImpl.getAll
+2025-11-19T20:05:53.693Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-10] c.m.u.AOP.ServiceLoggingAspect           : Service method completed: UserServiceImpl.getAll - Execution time: 298ms
+2025-11-19T20:05:53.697Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-10] c.m.u.AOP.ControllerLoggingAspect        : Controller method executed successfully: UserController.getAll - Execution time: 304ms
+2025-11-19T20:06:14.413Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-1] c.m.u.AOP.ControllerLoggingAspect        : Controller method called: UserController.createUser
+2025-11-19T20:06:14.415Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-1] c.m.u.AOP.ServiceLoggingAspect           : Service method started: UserServiceImpl.createUser
+2025-11-19T20:06:14.474Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-1] c.m.u.AOP.ServiceLoggingAspect           : Service method failed: UserServiceImpl.createUser - Execution time: 58ms
+2025-11-19T20:06:14.475Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-1] c.m.u.AOP.ControllerLoggingAspect        : Controller method failed: UserController.createUser - Execution time: 60ms
+2025-11-19T20:06:14.487Z ERROR 1 --- [User-Management-Service-Task] [http-nio-8080-exec-1] c.m.u.exception.GlobalExceptionHandler   : Base exception occured: Type: BusinessException, Message: Email already taken, Path: /api/user, Status: 409 CONFLICT
+2025-11-19T20:06:21.984Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-2] c.m.u.AOP.ControllerLoggingAspect        : Controller method called: UserController.createUser
+2025-11-19T20:06:21.986Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-2] c.m.u.AOP.ServiceLoggingAspect           : Service method started: UserServiceImpl.createUser
+2025-11-19T20:06:22.233Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-2] o.a.k.clients.producer.ProducerConfig    : ProducerConfig values: 
+	acks = -1
+	auto.include.jmx.reporter = true
+	batch.size = 16384
+	bootstrap.servers = [kafka:9092]
+	buffer.memory = 33554432
+	client.dns.lookup = use_all_dns_ips
+	client.id = User-Management-Service-Task-producer-1
+	compression.gzip.level = -1
+	compression.lz4.level = 9
+	compression.type = none
+	compression.zstd.level = 3
+	connections.max.idle.ms = 540000
+	delivery.timeout.ms = 120000
+	enable.idempotence = true
+	enable.metrics.push = true
+	interceptor.classes = []
+	key.serializer = class org.apache.kafka.common.serialization.StringSerializer
+	linger.ms = 0
+	max.block.ms = 60000
+	max.in.flight.requests.per.connection = 5
+	max.request.size = 1048576
+	metadata.max.age.ms = 300000
+	metadata.max.idle.ms = 300000
+	metadata.recovery.strategy = none
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partitioner.adaptive.partitioning.enable = true
+	partitioner.availability.timeout.ms = 0
+	partitioner.class = null
+	partitioner.ignore.keys = false
+	receive.buffer.bytes = 32768
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retries = 2147483647
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	transaction.timeout.ms = 60000
+	transactional.id = null
+	value.serializer = class org.apache.kafka.common.serialization.StringSerializer
+
+2025-11-19T20:06:22.245Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-2] o.a.k.c.t.i.KafkaMetricsCollector        : initializing Kafka metrics collector
+2025-11-19T20:06:22.273Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-2] o.a.k.clients.producer.KafkaProducer     : [Producer clientId=User-Management-Service-Task-producer-1] Instantiated an idempotent producer.
+2025-11-19T20:06:22.311Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-2] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 3.9.1
+2025-11-19T20:06:22.313Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-2] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: f745dfdcee2b9851
+2025-11-19T20:06:22.321Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-2] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1763582782311
+2025-11-19T20:06:22.327Z  INFO 1 --- [User-Management-Service-Task] [kafka-producer-network-thread | User-Management-Service-Task-producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=User-Management-Service-Task-producer-1] Cluster ID: V9vDQpWRSOq8WrVpfZQRTg
+2025-11-19T20:06:22.394Z  INFO 1 --- [User-Management-Service-Task] [kafka-producer-network-thread | User-Management-Service-Task-producer-1] o.a.k.c.p.internals.TransactionManager   : [Producer clientId=User-Management-Service-Task-producer-1] ProducerId set to 1000 with epoch 0
+2025-11-19T20:06:22.396Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-2] c.m.u.AOP.ServiceLoggingAspect           : Service method completed: UserServiceImpl.createUser - Execution time: 409ms
+2025-11-19T20:06:22.397Z  INFO 1 --- [User-Management-Service-Task] [http-nio-8080-exec-2] c.m.u.AOP.ControllerLoggingAspect        : Controller method executed successfully: UserController.createUser - Execution time: 411ms
+2025-11-19T20:06:22.483Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] c.m.u.AOP.ServiceLoggingAspect           : Service method started: NotificationConsumer.consumeUserRegisteredEvent
+2025-11-19T20:06:22.485Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] c.m.u.AOP.ServiceLoggingAspect           : Service method started: EmailService.sendWelcomeEmail
+2025-11-19T20:06:22.620Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] c.m.u.AOP.ServiceLoggingAspect           : Service method completed: EmailService.sendWelcomeEmail - Execution time: 134ms
+2025-11-19T20:06:22.622Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] c.m.u.AOP.ServiceLoggingAspect           : Service method completed: NotificationConsumer.consumeUserRegisteredEvent - Execution time: 137ms
+2025-11-19T20:07:12.306Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] k.c.c.i.ConsumerRebalanceListenerInvoker : [Consumer clientId=consumer-notification-group-v2-1, groupId=notification-group-v2] Revoke previously assigned partitions user-registered-0
+2025-11-19T20:07:12.308Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : notification-group-v2: partitions revoked: [user-registered-0]
+2025-11-19T20:07:12.310Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notification-group-v2-1, groupId=notification-group-v2] Member consumer-notification-group-v2-1-93f55871-d090-4265-9077-521caad74626 sending LeaveGroup request to coordinator kafka:9092 (id: 2147483646 rack: null) due to the consumer unsubscribed from all topics
+2025-11-19T20:07:12.312Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notification-group-v2-1, groupId=notification-group-v2] Resetting generation and member id due to: consumer pro-actively leaving the group
+2025-11-19T20:07:12.313Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notification-group-v2-1, groupId=notification-group-v2] Request joining group due to: consumer pro-actively leaving the group
+2025-11-19T20:07:12.315Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.i.ClassicKafkaConsumer         : [Consumer clientId=consumer-notification-group-v2-1, groupId=notification-group-v2] Unsubscribed all topics or patterns and assigned partitions
+2025-11-19T20:07:12.321Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notification-group-v2-1, groupId=notification-group-v2] Resetting generation and member id due to: consumer pro-actively leaving the group
+2025-11-19T20:07:12.326Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notification-group-v2-1, groupId=notification-group-v2] Request joining group due to: consumer pro-actively leaving the group
+2025-11-19T20:07:12.520Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.apache.kafka.common.metrics.Metrics    : Metrics scheduler closed
+2025-11-19T20:07:12.522Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.apache.kafka.common.metrics.Metrics    : Closing reporter org.apache.kafka.common.metrics.JmxReporter
+2025-11-19T20:07:12.526Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.apache.kafka.common.metrics.Metrics    : Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
+2025-11-19T20:07:12.529Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.apache.kafka.common.metrics.Metrics    : Metrics reporters closed
+2025-11-19T20:07:12.543Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.kafka.common.utils.AppInfoParser     : App info kafka.consumer for consumer-notification-group-v2-1 unregistered
+2025-11-19T20:07:12.545Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : notification-group-v2: Consumer stopped
+2025-11-19T20:07:12.553Z  INFO 1 --- [User-Management-Service-Task] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-11-19T20:07:12.560Z  INFO 1 --- [User-Management-Service-Task] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-11-19T20:07:12.568Z  INFO 1 --- [User-Management-Service-Task] [SpringApplicationShutdownHook] o.a.k.clients.producer.KafkaProducer     : [Producer clientId=User-Management-Service-Task-producer-1] Closing the Kafka producer with timeoutMillis = 30000 ms.
+2025-11-19T20:07:12.576Z  INFO 1 --- [User-Management-Service-Task] [SpringApplicationShutdownHook] o.apache.kafka.common.metrics.Metrics    : Metrics scheduler closed
+2025-11-19T20:07:12.578Z  INFO 1 --- [User-Management-Service-Task] [SpringApplicationShutdownHook] o.apache.kafka.common.metrics.Metrics    : Closing reporter org.apache.kafka.common.metrics.JmxReporter
+2025-11-19T20:07:12.578Z  INFO 1 --- [User-Management-Service-Task] [SpringApplicationShutdownHook] o.apache.kafka.common.metrics.Metrics    : Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
+2025-11-19T20:07:12.579Z  INFO 1 --- [User-Management-Service-Task] [SpringApplicationShutdownHook] o.apache.kafka.common.metrics.Metrics    : Metrics reporters closed
+2025-11-19T20:07:12.581Z  INFO 1 --- [User-Management-Service-Task] [SpringApplicationShutdownHook] o.a.kafka.common.utils.AppInfoParser     : App info kafka.producer for User-Management-Service-Task-producer-1 unregistered
+2025-11-19T20:07:12.587Z  INFO 1 --- [User-Management-Service-Task] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'

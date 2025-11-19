@@ -11,15 +11,16 @@ import com.mlbyl.usermanagementservicetask.specification.UserSpecification;
 import com.mlbyl.usermanagementservicetask.utils.constant.ErrorCode;
 import com.mlbyl.usermanagementservicetask.utils.constant.ErrorMessage;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -27,6 +28,7 @@ import java.util.UUID;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final KafkaTemplate<String, String> kafkaTemplate;
 
     @Override
     public UserResponse createUser(UserCreateRequest request) {
@@ -38,6 +40,8 @@ public class UserServiceImpl implements UserService {
         user.setUserRole(UserRole.ROLE_USER);
 
         User savedUser = userRepository.save(user);
+
+        kafkaTemplate.send("user-registered", savedUser.getEmail());
         return UserMapper.toResponse(savedUser);
     }
 
