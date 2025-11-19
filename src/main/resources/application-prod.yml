@@ -1,0 +1,36 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: User-Management-Service-Task
+
+  profiles:
+    active: prod
+
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASS}
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+
+  liquibase:
+    enabled: false  # Prod'da Liquibase CI/CD tarafında çalışacak
+
+# Kafka prod’da kapalı
+kafka:
+  bootstrap-servers: disabled
+
+# Mail prod’da kapalı (SendGrid vb. eklenecekse burada açarsın)
+mail:
+  host:
+  port:
+  username:
+  password:
