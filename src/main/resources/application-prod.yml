@@ -4,8 +4,6 @@ server:
 spring:
   application:
     name: User-Management-Service-Task
-  profiles:
-    active: prod
   datasource:
     url: ${DB_URL}
     username: ${DB_USER}
