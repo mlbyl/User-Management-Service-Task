@@ -21,9 +21,10 @@ spring:
     enabled: true
     change-log: classpath:/db/changelog/db.changelog-master.yaml
 
+app:
+  swagger:
+    server-url:${SWAGGER_SERVER_URL:https://user-management-service-task-1.onrender.com/}
 
-
-# Mail prod’da kapalı (SendGrid vb. eklenecekse burada açarsın)
   mail:
     host:
     port:
