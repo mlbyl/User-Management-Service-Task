@@ -29,19 +29,17 @@ spring:
     port:
     username:
     password:
-#logging:
-#  level:
-#    root: INFO
-#    org.springframework.web: WARN
-#    org.apache.kafka: INFO
-#    org.springframework.web.servlet: WARN
-#    org.apache.catalina: WARN
-#    org.apache.tomcat: WARN
-#    org.hibernate: WARN
-#    com.zaxxer.hikari: WARN
-#  pattern:
-#    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
-#  file:
-#    name: logs/user-management.log
-#  exception-conversion-word: "%xEx{short}"
+logging:
+  level:
+    root: INFO
+    org.springframework.web: WARN
+    org.apache.kafka: INFO
+    org.springframework.web.servlet: WARN
+    org.apache.catalina: WARN
+    org.apache.tomcat: WARN
+    org.hibernate: WARN
+    com.zaxxer.hikari: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  exception-conversion-word: "%xEx{short}"
 
