@@ -18,7 +18,8 @@ spring:
       ddl-auto: none
     show-sql: false
   liquibase:
-    enabled: false  # Prod'da Liquibase CI/CD tarafında çalışacak
+    enabled: true
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
 
 
 
