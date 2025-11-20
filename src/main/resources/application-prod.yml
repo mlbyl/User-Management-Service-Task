@@ -23,7 +23,7 @@ spring:
 
 app:
   swagger:
-    server-url:${SWAGGER_SERVER_URL:https://user-management-service-task-1.onrender.com/}
+    server-url: ${SWAGGER_SERVER_URL:https://user-management-service-task-1.onrender.com}
 
   mail:
     host:
