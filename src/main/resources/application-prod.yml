@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: User-Management-Service-Task
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
   datasource:
     url: ${DB_URL}
     username: ${DB_USER}
@@ -18,9 +20,7 @@ spring:
   liquibase:
     enabled: false  # Prod'da Liquibase CI/CD tarafında çalışacak
 
-# Kafka prod’da kapalı
-  kafka:
-    bootstrap-servers: disabled
+
 
 # Mail prod’da kapalı (SendGrid vb. eklenecekse burada açarsın)
   mail:
