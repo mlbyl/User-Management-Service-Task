@@ -2,7 +2,6 @@ package com.mlbyl.usermanagementservicetask.service;
 
 import com.mlbyl.usermanagementservicetask.dto.*;
 
-import java.util.List;
 import java.util.UUID;
 
 public interface UserService {

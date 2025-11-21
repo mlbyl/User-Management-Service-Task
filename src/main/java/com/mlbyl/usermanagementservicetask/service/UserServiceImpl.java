@@ -11,7 +11,6 @@ import com.mlbyl.usermanagementservicetask.specification.UserSpecification;
 import com.mlbyl.usermanagementservicetask.utils.constant.ErrorCode;
 import com.mlbyl.usermanagementservicetask.utils.constant.ErrorMessage;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

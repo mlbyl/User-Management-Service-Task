@@ -1,0 +1,46 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: User-Management-Service-Task
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
+  datasource:
+    url: jdbc:postgresql://localhost:9999/user-management-service-task
+    username: postgres
+    password: 12345678
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
+
+
+
+  mail:
+    host:
+    port:
+    username:
+    password:
+logging:
+  level:
+    root: INFO
+    org.springframework.web: WARN
+    org.apache.kafka: INFO
+    org.springframework.web.servlet: WARN
+    org.apache.catalina: WARN
+    org.apache.tomcat: WARN
+    org.hibernate: WARN
+    com.zaxxer.hikari: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: logs/user-management.log
+  exception-conversion-word: "%xEx{short}"
+
