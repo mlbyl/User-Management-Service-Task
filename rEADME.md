@@ -688,7 +688,7 @@ The application includes comprehensive unit tests for both Controller and Servic
 ## Production Deployment
 
 ### Live Application
-The application is currently deployed on Render:
+The application is currently deployed on Render (Render set sleep mode by default, so wait 1-2 minute to waking up service):
 **https://user-management-service-task-1.onrender.com**
 
 You can access Swagger UI at:
@@ -731,6 +731,8 @@ You can access Swagger UI at:
 
 [mahammadalibayli@gmail.com]
 
+
+## Project Core Architecture 
 ```mermaid
 flowchart TD
     %% External Clients
