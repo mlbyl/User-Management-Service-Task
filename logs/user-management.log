@@ -1,0 +1,241 @@
+2025-11-21T09:18:54.692Z  INFO 1 --- [User-Management-Service-Task] [main] m.u.UserManagementServiceTaskApplication : Starting UserManagementServiceTaskApplication v0.0.1-SNAPSHOT using Java 21.0.9 with PID 1 (/app/User-Management-Service-Task.jar started by root in /app)
+2025-11-21T09:18:54.698Z  INFO 1 --- [User-Management-Service-Task] [main] m.u.UserManagementServiceTaskApplication : No active profile set, falling back to 1 default profile: "default"
+2025-11-21T09:18:56.218Z  INFO 1 --- [User-Management-Service-Task] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-21T09:18:56.368Z  INFO 1 --- [User-Management-Service-Task] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 121 ms. Found 1 JPA repository interface.
+2025-11-21T09:18:57.939Z  INFO 1 --- [User-Management-Service-Task] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-11-21T09:18:58.057Z  INFO 1 --- [User-Management-Service-Task] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3265 ms
+2025-11-21T09:18:59.186Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.database                       : Set default schema name to public
+2025-11-21T09:18:59.839Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.changelog                      : Reading from public.databasechangelog
+2025-11-21T09:18:59.930Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.ui                             : Database is up to date, no changesets to execute
+2025-11-21T09:19:00.068Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.changelog                      : Reading from public.databasechangelog
+2025-11-21T09:19:00.127Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : UPDATE SUMMARY
+2025-11-21T09:19:00.129Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : Run:                          0
+2025-11-21T09:19:00.133Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : Previously run:               1
+2025-11-21T09:19:00.134Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : Filtered out:                 0
+2025-11-21T09:19:00.135Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : -------------------------------
+2025-11-21T09:19:00.135Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : Total change sets:            1
+2025-11-21T09:19:00.138Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.util                           : Update summary generated
+2025-11-21T09:19:00.141Z  INFO 1 --- [User-Management-Service-Task] [main] liquibase.command                        : Command execution complete
+2025-11-21T09:19:02.663Z  INFO 1 --- [User-Management-Service-Task] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-11-21T09:19:02.797Z  WARN 1 --- [User-Management-Service-Task] [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-11-21T09:19:04.318Z  INFO 1 --- [User-Management-Service-Task] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-21T09:19:05.925Z  WARN 1 --- [User-Management-Service-Task] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-21T09:19:07.401Z  INFO 1 --- [User-Management-Service-Task] [main] o.a.k.clients.admin.AdminClientConfig    : AdminClientConfig values: 
+	auto.include.jmx.reporter = true
+	bootstrap.controllers = []
+	bootstrap.servers = [kafka:9092]
+	client.dns.lookup = use_all_dns_ips
+	client.id = User-Management-Service-Task-admin-0
+	connections.max.idle.ms = 300000
+	default.api.timeout.ms = 60000
+	enable.metrics.push = true
+	metadata.max.age.ms = 300000
+	metadata.recovery.strategy = none
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retries = 2147483647
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+
+2025-11-21T09:19:07.750Z  INFO 1 --- [User-Management-Service-Task] [main] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 3.9.1
+2025-11-21T09:19:07.751Z  INFO 1 --- [User-Management-Service-Task] [main] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: f745dfdcee2b9851
+2025-11-21T09:19:07.753Z  INFO 1 --- [User-Management-Service-Task] [main] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1763716747748
+2025-11-21T09:19:08.584Z  INFO 1 --- [User-Management-Service-Task] [kafka-admin-client-thread | User-Management-Service-Task-admin-0] o.a.kafka.common.utils.AppInfoParser     : App info kafka.admin.client for User-Management-Service-Task-admin-0 unregistered
+2025-11-21T09:19:08.604Z  INFO 1 --- [User-Management-Service-Task] [kafka-admin-client-thread | User-Management-Service-Task-admin-0] o.apache.kafka.common.metrics.Metrics    : Metrics scheduler closed
+2025-11-21T09:19:08.605Z  INFO 1 --- [User-Management-Service-Task] [kafka-admin-client-thread | User-Management-Service-Task-admin-0] o.apache.kafka.common.metrics.Metrics    : Closing reporter org.apache.kafka.common.metrics.JmxReporter
+2025-11-21T09:19:08.607Z  INFO 1 --- [User-Management-Service-Task] [kafka-admin-client-thread | User-Management-Service-Task-admin-0] o.apache.kafka.common.metrics.Metrics    : Metrics reporters closed
+2025-11-21T09:19:08.650Z  INFO 1 --- [User-Management-Service-Task] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-11-21T09:19:08.690Z  INFO 1 --- [User-Management-Service-Task] [main] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	allow.auto.create.topics = true
+	auto.commit.interval.ms = 5000
+	auto.include.jmx.reporter = true
+	auto.offset.reset = earliest
+	bootstrap.servers = [kafka:9092]
+	check.crcs = true
+	client.dns.lookup = use_all_dns_ips
+	client.id = consumer-notification-group-v2-1
+	client.rack = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	enable.metrics.push = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = notification-group-v2
+	group.instance.id = null
+	group.protocol = classic
+	group.remote.assignor = null
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	internal.throw.on.fetch.stable.offset.unsupported = false
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metadata.recovery.strategy = none
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	session.timeout.ms = 45000
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+
+2025-11-21T09:19:08.763Z  INFO 1 --- [User-Management-Service-Task] [main] o.a.k.c.t.i.KafkaMetricsCollector        : initializing Kafka metrics collector
+2025-11-21T09:19:08.840Z  INFO 1 --- [User-Management-Service-Task] [main] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 3.9.1
+2025-11-21T09:19:08.841Z  INFO 1 --- [User-Management-Service-Task] [main] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: f745dfdcee2b9851
+2025-11-21T09:19:08.842Z  INFO 1 --- [User-Management-Service-Task] [main] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1763716748840
+2025-11-21T09:19:08.846Z  INFO 1 --- [User-Management-Service-Task] [main] o.a.k.c.c.i.ClassicKafkaConsumer         : [Consumer clientId=consumer-notification-group-v2-1, groupId=notification-group-v2] Subscribed to topic(s): user-registered
+2025-11-21T09:19:08.880Z  INFO 1 --- [User-Management-Service-Task] [main] m.u.UserManagementServiceTaskApplication : Started UserManagementServiceTaskApplication in 15.254 seconds (process running for 16.561)
+2025-11-21T09:19:08.895Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] org.apache.kafka.clients.Metadata        : [Consumer clientId=consumer-notification-group-v2-1, groupId=notification-group-v2] Cluster ID: V9vDQpWRSOq8WrVpfZQRTg
+2025-11-21T09:19:08.901Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notification-group-v2-1, groupId=notification-group-v2] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+2025-11-21T09:19:08.907Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notification-group-v2-1, groupId=notification-group-v2] (Re-)joining group
+2025-11-21T09:19:08.949Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notification-group-v2-1, groupId=notification-group-v2] Request joining group due to: need to re-join with the given member-id: consumer-notification-group-v2-1-1cf4d237-ba4d-4303-a7e7-f19fc8bfec01
+2025-11-21T09:19:08.951Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notification-group-v2-1, groupId=notification-group-v2] (Re-)joining group
+2025-11-21T09:19:11.993Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notification-group-v2-1, groupId=notification-group-v2] Successfully joined group with generation Generation{generationId=16, memberId='consumer-notification-group-v2-1-1cf4d237-ba4d-4303-a7e7-f19fc8bfec01', protocol='range'}
+2025-11-21T09:19:12.022Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notification-group-v2-1, groupId=notification-group-v2] Finished assignment for group at generation 16: {consumer-notification-group-v2-1-1cf4d237-ba4d-4303-a7e7-f19fc8bfec01=Assignment(partitions=[user-registered-0])}
+2025-11-21T09:19:12.093Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notification-group-v2-1, groupId=notification-group-v2] Successfully synced group in generation Generation{generationId=16, memberId='consumer-notification-group-v2-1-1cf4d237-ba4d-4303-a7e7-f19fc8bfec01', protocol='range'}
+2025-11-21T09:19:12.096Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notification-group-v2-1, groupId=notification-group-v2] Notifying assignor about the new Assignment(partitions=[user-registered-0])
+2025-11-21T09:19:12.100Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] k.c.c.i.ConsumerRebalanceListenerInvoker : [Consumer clientId=consumer-notification-group-v2-1, groupId=notification-group-v2] Adding newly assigned partitions: user-registered-0
+2025-11-21T09:19:12.129Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerUtils        : Setting offset for partition user-registered-0 to the committed offset FetchPosition{offset=6, offsetEpoch=Optional.empty, currentLeader=LeaderAndEpoch{leader=Optional[kafka:9092 (id: 1 rack: null)], epoch=0}}
+2025-11-21T09:19:12.133Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : notification-group-v2: partitions assigned: [user-registered-0]
+2025-11-21T09:19:44.161Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] k.c.c.i.ConsumerRebalanceListenerInvoker : [Consumer clientId=consumer-notification-group-v2-1, groupId=notification-group-v2] Revoke previously assigned partitions user-registered-0
+2025-11-21T09:19:44.177Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : notification-group-v2: partitions revoked: [user-registered-0]
+2025-11-21T09:19:44.184Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notification-group-v2-1, groupId=notification-group-v2] Member consumer-notification-group-v2-1-1cf4d237-ba4d-4303-a7e7-f19fc8bfec01 sending LeaveGroup request to coordinator kafka:9092 (id: 2147483646 rack: null) due to the consumer unsubscribed from all topics
+2025-11-21T09:19:44.189Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notification-group-v2-1, groupId=notification-group-v2] Resetting generation and member id due to: consumer pro-actively leaving the group
+2025-11-21T09:19:44.190Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notification-group-v2-1, groupId=notification-group-v2] Request joining group due to: consumer pro-actively leaving the group
+2025-11-21T09:19:44.192Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.i.ClassicKafkaConsumer         : [Consumer clientId=consumer-notification-group-v2-1, groupId=notification-group-v2] Unsubscribed all topics or patterns and assigned partitions
+2025-11-21T09:19:44.200Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notification-group-v2-1, groupId=notification-group-v2] Resetting generation and member id due to: consumer pro-actively leaving the group
+2025-11-21T09:19:44.202Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-notification-group-v2-1, groupId=notification-group-v2] Request joining group due to: consumer pro-actively leaving the group
+2025-11-21T09:19:44.254Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.apache.kafka.common.metrics.Metrics    : Metrics scheduler closed
+2025-11-21T09:19:44.255Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.apache.kafka.common.metrics.Metrics    : Closing reporter org.apache.kafka.common.metrics.JmxReporter
+2025-11-21T09:19:44.259Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.apache.kafka.common.metrics.Metrics    : Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
+2025-11-21T09:19:44.260Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.apache.kafka.common.metrics.Metrics    : Metrics reporters closed
+2025-11-21T09:19:44.269Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.a.kafka.common.utils.AppInfoParser     : App info kafka.consumer for consumer-notification-group-v2-1 unregistered
+2025-11-21T09:19:44.271Z  INFO 1 --- [User-Management-Service-Task] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : notification-group-v2: Consumer stopped
+2025-11-21T09:19:44.278Z  INFO 1 --- [User-Management-Service-Task] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-11-21T09:19:44.284Z  INFO 1 --- [User-Management-Service-Task] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-11-21T09:19:44.293Z  INFO 1 --- [User-Management-Service-Task] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
