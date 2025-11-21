@@ -1,429 +1,277 @@
-# User Management Service - README
+# User Management Service
 
 ## Table of Contents
-1. [Installation](#installation)
-2. [Project Purpose and General Structure](#project-purpose-and-general-structure)
-3. [Architecture and Technologies](#architecture-and-technologies)
-4. [Database Management](#database-management)
-5. [User Management Details](#user-management-details)
-6. [Error Handling](#error-handling)
-7. [Event-Driven Architecture](#event-driven-architecture)
-8. [API Documentation](#api-documentation)
+1. [About the Project](#about-the-project)
+2. [Technologies](#technologies)
+3. [Installation](#installation)
+   - [Option 1: IntelliJ Local Development](#option-1-intellij-local-development)
+   - [Option 2: Full Docker Setup](#option-2-full-docker-setup)
+4. [API Documentation](#api-documentation)
+5. [Architecture & Design Decisions](#architecture--design-decisions)
+6. [Testing](#testing)
+7. [Production Deployment](#production-deployment)
+
+---
+
+## About the Project
+
+This project is a **user management system** that incorporates the fundamentals of modern microservice architecture. It performs user registration, update, deletion, and query operations in a secure, scalable, and maintainable way. The system is designed with clean architecture principles, using layered separation of concerns, event-driven communication capabilities, and production-ready error handling patterns.
+
+### Live Demo
+The application is deployed and accessible at:
+**https://user-management-service-task-1.onrender.com/api/user**
+
+### What Can You Do?
+
+#### 1. User Creation
+- Creating new users with personal information
+- Each user gets a unique **UUID** identifier
+- Email addresses must be unique
+- Phone numbers must be unique
+- Passwords are automatically hashed with **BCrypt**
+- Default role `ROLE_USER` is assigned to all new users
+- After registration, a **user-registered event** is published to Kafka (Docker environment only)
+- Email notification sent via MailHog (Docker environment only)
+
+**Validation rules:**
+- Name and surname are required
+- Email must be valid format
+- Password must be 8-64 characters
+- Phone number must match pattern
+
+#### 2. User Query Operations
+- **Retrieve single user** by UUID
+- **List all users** with pagination
+- **Advanced filtering:**
+  - Filter by name (case-insensitive partial match)
+  - Filter by surname (case-insensitive partial match)
+  - Filter by email (case-insensitive partial match)
+  - Filter by date of birth range (`dateOfBirthFrom` and `dateOfBirthTo`)
+  - All filters combined with AND logic
+
+**Pagination includes:**
+- Page number and size configuration
+- Total elements and pages in response
+- First/last page indicators
+
+#### 3. User Updates
+- Update any user profile information
+- Email uniqueness validated when changed
+- Automatic timestamp update
+- All fields updatable: name, surname, email, password, phone, date of birth
+
+**Smart validation:**
+- Email unchanged? Skip uniqueness check for better performance
+- Email changed? Verify new email isn't already taken
+
+#### 4. User Deletion
+- Permanent removal from system
+- Hard delete operation
+- Related data handled by database cascade rules
+
+---
+
+## Technologies
+
+### Core Stack
+- **Java 21** - Programming language and runtime
+- **Spring Boot 3.x** - Main application framework
+- **PostgreSQL 16** - Relational database
+- **Liquibase** - Database migration management
+- **Apache Kafka** - Event-driven messaging (Docker environment only)
+- **Docker & Docker Compose** - Containerization and orchestration
+
+### Key Dependencies
+- **Spring Data JPA** - Database abstraction and ORM
+- **Spring Validation** - Request validation with Bean Validation
+- **Spring AOP** - Aspect-oriented programming for logging
+- **BCrypt** - Password encryption via Spring Security's PasswordEncoder
+- **Lombok** - Boilerplate code reduction
+- **Swagger/OpenAPI** - API documentation and testing interface
+
 
 ---
 
 ## Installation
 
 ### Prerequisites
-To run this project, you need the following tools installed on your system:
-- Docker and Docker Compose
-- Git (to clone the project)
+- **Java 21** installed on your system
+- **PostgreSQL 16** (or pgAdmin for database management)
+- **Docker and Docker Compose** (for full Docker setup)
+- **Git**
 
-### Step-by-Step Installation
+---
 
-#### 1. Clone the Project
+### Option 1: IntelliJ Local Development
+
+**Recommended for rapid development and debugging.**
+
+This option runs the Spring Boot application directly in IntelliJ using the `dev` profile with a simplified configuration. Kafka and MailHog are **completely disabled** in this setup, allowing you to focus on core functionality without external dependencies.
+
+#### Step 1: Clone the Repository
+
 ```bash
-git clone <repository-url>
-cd user-management-service
+git clone <https://github.com/mlbyl/User-Management-Service-Task>
+cd User-Management-Service-Task
 ```
 
-#### 2. Start Docker Containers
-The project manages all dependencies through Docker. You can start all services with a single command:
+#### Step 2: Create Database Manually
+
+If you have **pgAdmin** or PostgreSQL installed locally:
+
+1. Open pgAdmin or connect to PostgreSQL via terminal
+2. Create a new database:
+```sql
+CREATE DATABASE user_management;
+```
+
+**Important Note:** You only need to create the database. The tables will be automatically created by Liquibase when the application starts. Do NOT manually create tables.
+
+#### Step 3: Configure application-dev.yml
+
+The project includes an `application-dev.yml` file specifically for local development. This profile contains minimal configuration:
+
+```yaml
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/user_management
+    username: postgres
+    password: your_postgres_password
+  jpa:
+    hibernate:
+      ddl-auto: none  # Important: Liquibase handles schema
+
+```
+
+**Key Points:**
+- `ddl-auto: none` ensures Hibernate doesn't manage schema - Liquibase does
+- Only the **database** needs to be created manually
+- **Tables** are automatically created by Liquibase on first run
+- Update the `password` field with your local PostgreSQL password
+- Kafka and MailHog configurations are completely absent
+- Only Swagger and core endpoints are enabled
+
+#### Step 4: Run in IntelliJ with dev Profile
+
+1. Open the project in IntelliJ IDEA
+2. Locate the main application class (UserManagementServiceTaskApplication)
+3. **Right-click** on the Run button (green triangle)
+4. Select **"Modify Run Configuration..."**
+5. In the configuration dialog, find the **"Environment"** section
+6. Set **Active profiles** to: `dev`
+7. Click **Apply** and then **OK**
+8. Now run the application
+
+Alternatively, you can set the profile via VM options:
+```
+-Dspring.profiles.active=dev
+```
+
+#### Step 5: Verify Application is Running
+
+1. Application will start on `http://localhost:8080/`
+2. Access Swagger UI at `http://localhost:8080/swagger-ui/index.html`
+3. Check console logs for successful startup message
+
+**Note:** The application will start successfully without Kafka and MailHog. These services are only available in the Docker environment.
+
+---
+
+### Option 2: Full Docker Setup
+
+**Recommended for production-like testing and team environment consistency.**
+
+This option runs all services including PostgreSQL, Kafka, Zookeeper, MailHog, and the application in Docker containers using the default `application.yml` configuration.
+
+#### Step 1: Clone the Repository
+
+```bash
+git clone <https://github.com/mlbyl/User-Management-Service-Task>
+cd User-Management-Service-Task
+```
+
+#### Step 2: Start All Services
 
 ```bash
 docker-compose up -d
 ```
 
 This command will start:
-- **PostgreSQL**: Database service running on port 9999
-- **Apache Kafka**: Message queue for event-driven communication (port 9092)
-- **Zookeeper**: Coordination service for Kafka
-- **MailHog**: Email testing tool for development environment (SMTP: 1025, Web UI: 8025)
-- **Application**: Spring Boot application (port 8080)
+- **PostgreSQL** - Database service (port 9999)
+- **Apache Kafka** - Message broker (port 9092)
+- **Zookeeper** - Kafka coordination (port 2181)
+- **MailHog** - Email testing tool (SMTP: 1025, Web UI: 8025)
+- **Application** - Spring Boot service (port 8080)
 
-#### 3. Check Service Status
+**Important:** Kafka and MailHog are fully operational in this Docker-based environment.
+
+#### Step 3: Verify Services
+
 ```bash
 docker-compose ps
 ```
 
-Make sure all services are in "Up" status.
+All services should show "Up" status.
 
-#### 4. Access the Application
-- **API Endpoint**: http://localhost:8080
-- **MailHog Web UI**: http://localhost:8025 (to view sent emails)
-- **PostgreSQL**: localhost:9999 (user: postgres, password: 12345678)
+#### Step 4: Access the Application
 
-#### 5. Monitor Logs
+- **API Base URL**: http://localhost:8080
+- **Swagger UI**: http://localhost:8080/swagger-ui/index.html
+- **MailHog Web UI**: http://localhost:8025 (view sent emails)
+- **PostgreSQL**: localhost:9999 (username: postgres, password: 12345678)
+
+#### Step 5: Test Email Notifications
+
+When you create a new user via the API:
+1. The user will be successfully registered in the database
+2. A "user-registered" event will be published to Kafka
+3. An email notification will be sent to MailHog
+4. **Open http://localhost:8025** in your browser to see the email notification
+
+The MailHog interface will display all email notifications sent by the application, allowing you to verify email content without sending actual emails.
+
+#### Managing Docker Services
+
 ```bash
-# To monitor logs of all services
+# View all logs
 docker-compose logs -f
 
-# To monitor only application logs
+# View application logs only
 docker-compose logs -f app
-```
 
-### Stopping and Cleaning Containers
-```bash
-# Stop containers
+# Stop all services
 docker-compose down
 
-# Clean containers and volumes (database data will be deleted!)
+# Stop and remove volumes (WARNING: deletes database data!)
 docker-compose down -v
 ```
 
 ---
 
-## Project Purpose and General Structure
-
-This project is a **user management system** that incorporates the fundamentals of modern microservice architecture. The main purpose of the project is to perform user registration, update, deletion, and query operations in a secure, scalable, and maintainable way.
-
-### What Can Be Done?
-
-#### User Operations
-* **User Registration**: New users can be registered in the system
-  * Each user is identified by a unique UUID
-  * Email addresses must be unique
-  * Phone numbers are also kept unique
-  * Passwords are automatically hashed with BCrypt
-  * By default, each user is assigned the `ROLE_USER` role
-
-* **View User Information**: 
-  * Single user query (ID-based)
-  * Bulk listing with pagination support
-  * Advanced filtering capabilities
-
-* **User Update**: Existing user information can be updated
-  * Uniqueness check is performed when email changes
-  * Update time is automatically recorded
-
-* **User Deletion**: Users can be completely removed from the system
-
----
-
-## Architecture and Technologies
-
-### Core Technologies
-* **Java 21**: Programming language and runtime used in the project
-* **Spring Boot 3.x**: Main framework
-* **PostgreSQL 16**: Relational database
-* **Liquibase**: Database migration management
-* **Apache Kafka**: Event-driven messaging
-* **Docker & Docker Compose**: Containerization and orchestration
-
-### Layered Architecture
-
-The project uses a layered architecture in accordance with classic Spring Boot best practices:
-
-#### 1. Controller Layer
-`UserController` defines the API endpoints exposed to the outside world. This layer:
-- Receives HTTP requests
-- Triggers request validation (with Bean Validation)
-- Calls the Service layer
-- Returns responses with the standard `Result<T>` wrapper
-- Uses HTTP status codes compliant with REST principles (201 Created, 200 OK, etc.)
-
-#### 2. Service Layer
-`UserService` and its implementation `UserServiceImpl` are the center of business logic:
-- **Validation Rules**: Email and phone uniqueness check
-- **Encryption**: BCrypt hashing with PasswordEncoder
-- **Event Publishing**: Sends `user-registered` event over Kafka
-- **Transaction Management**: Uses Spring's declarative transaction management
-
-An interesting detail: Kafka dependency is injected **optionally**:
-```java
-private final ObjectProvider<KafkaTemplate<String, String>> kafkaTemplate;
-```
-
-This way, if Kafka is not present (for example, if it's disabled in the prod environment), the application doesn't throw an error, it just doesn't send events. This supports the scenario where Kafka is disabled in `application-prod.yml`.
-
-#### 3. Repository Layer
-`UserRepository` is the data access layer:
-- `JpaRepository`: For CRUD operations
-- `JpaSpecificationExecutor`: For dynamic query creation
-- Custom query methods: `existsByEmail`, `findByEmail`
-
-#### 4. Specification Layer
-`UserSpecification` creates dynamic and type-safe queries. Advantages of this pattern:
-- **Compile-time safety**: Incorrect field names will give a compile error
-- **Composability**: Multiple filters can be combined
-- **Null safety**: Null values are automatically ignored
-
-Example working logic:
-```java
-// Find users whose name contains AND surname contains
-predicates.add(cb.like(cb.lower(root.get("name")), "%john%"));
-predicates.add(cb.like(cb.lower(root.get("surname")), "%doe%"));
-// Predicates are combined with AND
-```
-
----
-
-## Database Management
-
-### Migration with Liquibase
-
-The project manages database schema changes with **Liquibase**. Benefits of this approach:
-
-1. **Version Control**: Every schema change is kept in git
-2. **Rollback Support**: Erroneous migrations can be rolled back
-3. **Environment Consistency**: Dev, test, prod have the same schema
-4. **Audit Trail**: What changes were made when is recorded
-
-Configuration:
-```yaml
-spring:
-  jpa:
-    hibernate:
-      ddl-auto: none  # Prevent Hibernate from creating schema
-  liquibase:
-    enabled: true
-    change-log: classpath:/db/changelog/db.changelog-master.yaml
-```
-
-`ddl-auto: none` is a very important detail. This disables Hibernate's automatic table creation and gives all control to Liquibase. This way:
-- Schema changes are made in a controlled manner
-- Tables don't accidentally drop in production
-- Changes go through code review
-
-### Entity Design
-
-The `User` entity has a well-thought-out design:
-
-```java
-@Id
-@GeneratedValue
-private UUID id;  // UUID usage
-```
-
-**Why UUID?**
-- No predictability risk of sequential IDs
-- Minimal collision risk in distributed systems
-- Client-side ID generation is possible
-- Security: Even if ID is shown in URL, it cannot be enumerated
-
-```java
-@CreationTimestamp
-private LocalDateTime createdAt;
-
-@UpdateTimestamp
-private LocalDateTime updatedAt;
-```
-
-**Audit Fields**: Automatically managed with Hibernate annotations. No need for manual setting.
-
-```java
-@Enumerated(EnumType.STRING)
-private UserRole userRole;
-```
-
-**EnumType.STRING usage**: Stores string values like "ROLE_USER" in the database. If the alternative `EnumType.ORDINAL` (0, 1, 2...) were used:
-- Changing the enum order would lead to data corruption
-- Code readability would decrease
-- Migration risks would increase
-
----
-
-## User Management Details
-
-### Registration Process
-
-When a user registers, the following steps occur:
-
-1. **Validation**: Request is automatically validated thanks to `@Valid` annotation
-   - Name and surname cannot be empty
-   - Email format check
-   - Password must be between 8-64 characters
-   - Phone number is checked with regex: `\+?[0-9]{7,15}`
-
-2. **Business Validation**: 
-   ```java
-   checkEmailExist(request.getEmail());
-   ```
-   If email exists in the database, `BusinessException` is thrown (HTTP 409 Conflict)
-
-3. **Password Encryption**:
-   ```java
-   String encodedPassword = passwordEncoder.encode(user.getPassword());
-   ```
-   BCrypt algorithm is used. A different salt is generated for each encode operation.
-
-4. **Role Assignment**:
-   ```java
-   user.setUserRole(UserRole.ROLE_USER);
-   ```
-   Default role is assigned. Can be used for role-based access control in the future.
-
-5. **Database Persist**: Saved to database within a transaction
-
-6. **Event Publishing**:
-   ```java
-   kafkaTemplate.ifAvailable(kafka -> 
-       kafka.send("user-registered", savedUser.getEmail())
-   );
-   ```
-   If Kafka is available, event is sent asynchronously. This event can be listened to by other microservices (for example, a service that sends welcome emails).
-
-### Filtering and Pagination
-
-The user list endpoint offers a sophisticated filtering mechanism:
-
-```java
-PageResponse<UserResponse> getAll(UserFilterRequest filterRequest, int page, int size)
-```
-
-**Specification Pattern**: Dynamic queries are created. Example scenarios:
-
-* **Users containing name**: `name=john` → `WHERE LOWER(name) LIKE '%john%'`
-* **Born in date range**: `dateOfBirthFrom=1990-01-01&dateOfBirthTo=2000-12-31`
-* **Combination**: Multiple filters are combined with AND
-
-**Pagination**: Spring Data's `Pageable` mechanism is used:
-- `page=0`: First page (0-indexed)
-- `size=10`: 10 records per page
-- Metadata is returned in response: `totalElements`, `totalPages`, `first`, `last`
-
-### Update Logic
-
-The update operation includes careful validation:
-
-```java
-if (!existUser.getEmail().equals(request.getEmail())) {
-    checkEmailExist(request.getEmail());
-}
-```
-
-**Logic**: If email hasn't changed, uniqueness check is unnecessary. If it has changed, it checks whether the new email is being used by someone else. This prevents unnecessary DB queries.
-
----
-
-## Error Handling
-
-The project uses an enterprise-grade error management strategy.
-
-### Exception Hierarchy
-
-```
-BaseException (abstract)
-├── NotFoundException (404)
-├── BusinessException (409, 400, etc.)
-├── ValidationException (400)
-├── DatabaseException (409)
-└── InternalServerErrorException (500)
-```
-
-Each exception has:
-- `errorCode`: Programmatic error code (e.g.: `USER_NOT_FOUND`)
-- `statusCode`: HTTP status code (e.g.: 404)
-- `message`: Human-readable error message
-
-### Global Exception Handler
-
-Centralized error catching with `@RestControllerAdvice`:
-
-```java
-@ExceptionHandler(BaseException.class)
-public ResponseEntity<Result<?>> handleBaseException(...)
-```
-
-**Advantages**:
-- No try-catch clutter in controllers
-- Consistent error response format
-- Detailed logging (error type, message, path, status)
-
-**Special Handlers**:
-
-1. **DataIntegrityViolationException**: Database constraint violations (unique, foreign key, etc.)
-   ```java
-   exception.getMostSpecificCause().getMessage()
-   ```
-   Returns the most specific error (e.g.: "duplicate key value violates unique constraint")
-
-2. **MethodArgumentNotValidException**: Bean Validation errors
-   ```java
-   List<String> errors = exception.getBindingResult().getFieldErrors()
-       .stream()
-       .map(error -> error.getField() + ": " + error.getDefaultMessage())
-       .toList();
-   ```
-   All validation errors are returned as a list (e.g.: `["email: Email cannot be blank", "password: Password must be between 8 and 64 characters long"]`)
-
-3. **Exception**: Catch-all handler. Catches unexpected errors and returns `500 Internal Server Error`.
-
-### Result Wrapper Pattern
-
-All API responses are wrapped with `Result<T>`:
-
-```json
-{
-  "success": true,
-  "message": "User created successfully",
-  "data": { ... },
-  // In case of error:
-  "errorCode": "USER_NOT_FOUND",
-  "statusCode": 404,
-  "path": "/api/user/123"
-}
-```
-
-**Benefits**:
-- Clients always expect the same response structure
-- Success/failure status is clearly indicated
-- Error details are in standard format
-- Null fields are not added to response with `@JsonInclude(JsonInclude.Include.NON_NULL)`
-
----
-
-## Event-Driven Architecture
-
-### Kafka Integration
-
-The project establishes asynchronous event-driven communication with Kafka. However, this integration is **optional**:
-
-```java
-private final ObjectProvider<KafkaTemplate<String, String>> kafkaTemplate;
-
-kafkaTemplate.ifAvailable(kafka -> kafka.send("user-registered", email));
-```
-
-**ObjectProvider Pattern**: Thanks to this pattern added in Spring 5.1:
-- If Kafka is not present, the application starts
-- If the bean is not found, the `ifAvailable` block doesn't run
-- Kafka can be disabled in production (`application-prod.yml`)
-
-### Event Flow
-
-1. **User Registration**:
-   ```
-   POST /api/user → UserService.createUser() 
-   → User saved to DB 
-   → Event published to Kafka topic "user-registered"
-   ```
-
-2. **Kafka Consumer** (not in this project, could be in another service):
-   ```
-   Listen to "user-registered" 
-   → Send welcome email via MailHog
-   ```
-
-### Email in Dev Environment
-
-Using MailHog is very practical:
-- **SMTP Server**: Runs on port 1025
-- **Web UI**: All sent emails can be viewed at http://localhost:8025
-- No real email sending, it's for testing purposes
-- In production, real SMTP (SendGrid, AWS SES, etc.) is used
-
----
-
 ## API Documentation
 
-### Main Endpoints
+### Base URL
+- **Local Development**: `http://localhost:8080/`
+- **Production**: `https://user-management-service-task-1.onrender.com/`
+
+**Important:** All endpoints are under the `/api/user` path prefix.
+
+### Swagger UI
+Interactive API documentation is available at:
+- **Local**: http://localhost:8080/swagger-ui/index.html
+- **Production**: https://user-management-service-task-1.onrender.com/swagger-ui/index.html
+
+You can test all endpoints directly from Swagger UI without any additional tools.
+
+---
+
+### Endpoints
 
 #### 1. Create User
-```http
-POST /api/user
-Content-Type: application/json
+**Endpoint:** `POST /api/user`
 
+**Request Body:**
+```json
 {
   "name": "John",
   "surname": "Doe",
@@ -434,7 +282,7 @@ Content-Type: application/json
 }
 ```
 
-**Response (201 Created)**:
+**Success Response (201 Created):**
 ```json
 {
   "success": true,
@@ -451,66 +299,11 @@ Content-Type: application/json
 }
 ```
 
-#### 2. Get User
-```http
-GET /api/user/{userId}
-```
+**Docker Environment Behavior:**
+- Event published to Kafka topic
+- Email notification sent to MailHog (viewable at http://localhost:8025)
 
-**Response (200 OK)**: Same as the data object above
-
-#### 3. List Users
-```http
-GET /api/user?name=John&page=0&size=10
-```
-
-**Response (200 OK)**:
-```json
-{
-  "success": true,
-  "message": "All users retrieved successfully",
-  "data": {
-    "content": [ /* user objects */ ],
-    "pageNumber": 0,
-    "pageSize": 10,
-    "totalElements": 25,
-    "totalPages": 3,
-    "first": true,
-    "last": false
-  }
-}
-```
-
-#### 4. Update User
-```http
-PUT /api/user/{userId}
-Content-Type: application/json
-
-{
-  "name": "John",
-  "surname": "Smith",
-  "email": "john.smith@example.com",
-  "password": "NewSecurePass456",
-  "phoneNumber": "+1234567890",
-  "dateOfBirth": "1990-01-15"
-}
-```
-
-#### 5. Delete User
-```http
-DELETE /api/user/{userId}
-```
-
-**Response (200 OK)**:
-```json
-{
-  "success": true,
-  "message": "User deleted successfully"
-}
-```
-
-### Error Response Examples
-
-**Validation Error (400 Bad Request)**:
+**Error Response - Validation (400 Bad Request):**
 ```json
 {
   "success": false,
@@ -525,18 +318,7 @@ DELETE /api/user/{userId}
 }
 ```
 
-**User Not Found (404 Not Found)**:
-```json
-{
-  "success": false,
-  "message": "User not found with ID: 550e8400-e29b-41d4-a716-446655440000",
-  "errorCode": "USER_NOT_FOUND",
-  "statusCode": 404,
-  "path": "/api/user/550e8400-e29b-41d4-a716-446655440000"
-}
-```
-
-**Email Already Taken (409 Conflict)**:
+**Error Response - Email Exists (409 Conflict):**
 ```json
 {
   "success": false,
@@ -549,87 +331,405 @@ DELETE /api/user/{userId}
 
 ---
 
-## Production Deployment Notes
+#### 2. Get User by ID
+**Endpoint:** `GET /api/user/{userId}`
+
+**Success Response (200 OK):**
+```json
+{
+  "success": true,
+  "message": "User retrieved successfully",
+  "data": {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "name": "John",
+    "surname": "Doe",
+    "email": "john.doe@example.com",
+    "phoneNumber": "+1234567890",
+    "dateOfBirth": "1990-01-15",
+    "userRole": "ROLE_USER"
+  }
+}
+```
+
+**Error Response - Not Found (404 Not Found):**
+```json
+{
+  "success": false,
+  "message": "User not found with ID: 550e8400-e29b-41d4-a716-446655440000",
+  "errorCode": "USER_NOT_FOUND",
+  "statusCode": 404,
+  "path": "/api/user/550e8400-e29b-41d4-a716-446655440000"
+}
+```
+
+---
+
+#### 3. List Users with Filtering
+**Endpoint:** `GET /api/user`
+
+**Query Parameters:**
+- `name` (optional) - Filter by name (partial match, case-insensitive)
+- `surname` (optional) - Filter by surname (partial match, case-insensitive)
+- `email` (optional) - Filter by email (partial match, case-insensitive)
+- `dateOfBirthFrom` (optional) - Minimum date of birth (format: YYYY-MM-DD)
+- `dateOfBirthTo` (optional) - Maximum date of birth (format: YYYY-MM-DD)
+- `page` (default: 0) - Page number (0-indexed)
+- `size` (default: 10) - Items per page
+
+**Example Request:**
+```
+GET /api/user?name=John&dateOfBirthFrom=1990-01-01&page=0&size=10
+```
+
+**Success Response (200 OK):**
+```json
+{
+  "success": true,
+  "message": "All users retrieved successfully",
+  "data": {
+    "content": [
+      {
+        "id": "550e8400-e29b-41d4-a716-446655440000",
+        "name": "John",
+        "surname": "Doe",
+        "email": "john.doe@example.com",
+        "phoneNumber": "+1234567890",
+        "dateOfBirth": "1990-01-15",
+        "userRole": "ROLE_USER"
+      }
+    ],
+    "pageNumber": 0,
+    "pageSize": 10,
+    "totalElements": 25,
+    "totalPages": 3,
+    "first": true,
+    "last": false
+  }
+}
+```
+
+---
+
+#### 4. Update User
+**Endpoint:** `PUT /api/user/{userId}`
+
+**Request Body:**
+```json
+{
+  "name": "John",
+  "surname": "Smith",
+  "email": "john.smith@example.com",
+  "password": "NewSecurePass456",
+  "phoneNumber": "+1234567890",
+  "dateOfBirth": "1990-01-15"
+}
+```
+
+**Success Response (200 OK):**
+```json
+{
+  "success": true,
+  "message": "User updated successfully",
+  "data": {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "name": "John",
+    "surname": "Smith",
+    "email": "john.smith@example.com",
+    "phoneNumber": "+1234567890",
+    "dateOfBirth": "1990-01-15",
+    "userRole": "ROLE_USER"
+  }
+}
+```
+
+---
+
+#### 5. Delete User
+**Endpoint:** `DELETE /api/user/{userId}`
+
+**Success Response (200 OK):**
+```json
+{
+  "success": true,
+  "message": "User deleted successfully"
+}
+```
+
+---
+
+## Architecture & Design Decisions
+
+### Layered Architecture
+
+The project follows a clean layered architecture pattern with clear separation of concerns:
+
+**1. Controller Layer** (`UserController`)
+- Handles HTTP requests and responses
+- Performs request validation using Bean Validation
+- Returns standardized `Result<T>` wrapper
+- Uses appropriate HTTP status codes
+- Subject to rate limiting protection
+
+**2. Service Layer** (`UserService`, `UserServiceImpl`,`EmailService`,`NotificationConsumer`)
+- Contains all business logic
+- Validates business rules (uniqueness checks)
+- Handles password encryption
+- Publishes Kafka events (when available)
+- Manages database transactions
+- All methods logged via AOP
+
+**3. Repository Layer** (`UserRepository`)
+- Provides CRUD operations via `JpaRepository`
+- Supports dynamic queries with `JpaSpecificationExecutor`
+- Custom query methods for specific needs
+
+**4. Specification Layer** (`UserSpecification`)
+- Creates type-safe dynamic queries
+- Supports multiple filter combinations
+- Filters available: name, surname, email, dateOfBirthFrom, dateOfBirthTo
+- Null filter values are automatically ignored
+- All filters combined with AND logic
+
+---
+
+### Database Design
+
+**Primary Key - UUID:**
+The system uses UUID instead of auto-incremented integers because:
+- UUIDs cannot be enumerated or predicted (better security)
+- Minimal collision risk in distributed systems
+- Enables client-side ID generation
+- Safer when exposing IDs in URLs
+
+**Automatic Timestamps:**
+- `createdAt`: Set automatically on entity creation
+- `updatedAt`: Updated automatically on modification
+- Managed by Hibernate's `@CreationTimestamp` and `@UpdateTimestamp`
+
+**Enum Storage:**
+User roles are stored as strings (`EnumType.STRING`) rather than numbers because:
+- Changing enum order doesn't corrupt existing data
+- Database values are human-readable ("ROLE_USER")
+- Safer for schema evolution and migrations
+
+---
+
+### Database Migration with Liquibase
+
+All schema changes are managed through Liquibase for version control and consistency:
+
+**Benefits:**
+- Complete version control of database schema
+- Rollback support for migrations
+- Environment consistency guaranteed
+- Full audit trail of changes
+
+**Critical Configuration:**
+```yaml
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none  # Prevents Hibernate from managing schema
+```
+
+This setting ensures only Liquibase manages the database schema, preventing accidental changes in production.
+
+**Important:** Only the database needs to be created manually for dev enviroment. All tables, constraints, and indexes are automatically created by Liquibase on application startup.
+
+---
+
+### Event-Driven Architecture (Docker Only)
+
+**Critical Note:** Kafka integration is **exclusively for Docker environment**. In local IntelliJ development with the `dev` profile, Kafka is completely disabled.
+
+**Optional Dependency Pattern:**
+- Kafka is injected using Spring's `ObjectProvider<KafkaTemplate>`
+- If Kafka service is unavailable, application starts normally (prevent to fail start with the `dev` and `prod` enviroments)
+- Events are published only when Kafka is present
+- No errors thrown when Kafka is missing
+
+**Event Flow (Docker Environment):**
+1. User registration completes successfully
+2. User data saved to PostgreSQL
+3. "user-registered" event published to Kafka
+4. Email service can consume this event
+
+**MailHog for Email Testing (Docker Only):**
+- Captures all outgoing emails without sending
+- SMTP server on port 1025
+- Web interface at **http://localhost:8025**
+- Used only in Docker environment
+- All user registration emails visible in MailHog UI
+- Production uses real SMTP providers
+
+---
+
+### Aspect-Oriented Programming (AOP) for Logging
+
+The application uses **Spring AOP** for cross-cutting concerns, specifically for comprehensive logging throughout the service layer.
+
+**Implementation Details:**
+- **Logging Aspect** intercepts all method calls in the service, controller and exception layer
+- Automatically logs method entry with parameters
+- Logs method exit with return values
+- Logs execution time for performance monitoring
+- Captures and logs exceptions with full stack traces
+
+**What Gets Logged:**
+- Method name and class
+- Execution duration
+- Exception details when errors occur
+
+**Log File Location:**
+All logs are written to: `logs/user-management.log`
+
+**Why AOP for Logging:**
+- Keeps business logic clean and focused
+- Eliminates repetitive logging code in every method
+- Centralized logging configuration
+- Easy to enable/disable logging
+- Consistent log format across the application
+
+
+**Example Log Output:**
+```
+2024-01-15 10:30:45 INFO  [UserServiceImpl] - Executing: createUser with args: [UserCreateRequest(name=John, email=john@example.com)]
+2024-01-15 10:30:45 INFO  [UserServiceImpl] - Method: createUser executed in 45ms
+2024-01-15 10:30:45 INFO  [UserServiceImpl] - Completed: createUser with result: Result(success=true)
+```
+
+---
+
+### CORS Configuration
+
+The application includes **Cross-Origin Resource Sharing (CORS)** configuration to control which domains can access the API.
+
+**Configuration Details:**
+- Allows requests from specified origins
+- Supports all standard HTTP methods (GET, POST, PUT, DELETE)
+- Handles preflight requests automatically
+- Credentials support enabled for authenticated requests
+
+
+---
+
+### Rate Limiting
+
+The application implements **rate limiting**  to prevent API abuse and ensure fair usage.
+
+---
+
+### Error Handling Strategy
+
+**Exception Hierarchy:**
+All custom exceptions extend `BaseException`:
+- `NotFoundException` → 404 Not Found
+- `BusinessException` → 409 Conflict or 400 Bad Request
+- `ValidationException` → 400 Bad Request
+- `DatabaseException` → 409 Conflict
+- `InternalServerErrorException` → 500 Internal Server Error
+
+**Exception Structure:**
+- `errorCode`: Machine-readable identifier
+- `statusCode`: HTTP status code
+- `message`: Human-readable description
+
+**Global Exception Handler:**
+Centralized error handling with `@RestControllerAdvice`:
+- Controllers remain clean
+- Consistent error format across all endpoints
+- Automatic logging of all errors via AOP
+
+**Special Handlers:**
+- **DataIntegrityViolationException**: Database constraint violations
+- **MethodArgumentNotValidException**: Bean Validation failures
+- **Generic Exception**: Catch-all for unexpected errors
+
+---
+
+### Result Wrapper Pattern
+
+All API responses use standardized `Result<T>` wrapper for consistency:
+
+**Success Response:**
+```json
+{
+  "success": true,
+  "message": "Operation completed",
+  "data": { /* response payload */ }
+}
+```
+
+**Error Response:**
+```json
+{
+  "success": false,
+  "message": "Error description",
+  "errorCode": "ERROR_CODE",
+  "statusCode": 400,
+  "path": "/api/user"
+}
+```
+
+**Benefits:**
+- Predictable response structure
+- Clear success/failure indication
+- Standardized error format
+- Easy client-side parsing
+
+---
+
+## Testing
+
+The application includes comprehensive unit tests for both Controller and Service layers to ensure code quality and reliability.
+
+---
+
+## Production Deployment
+
+### Live Application
+The application is currently deployed on Render:
+**https://user-management-service-task-1.onrender.com**
+
+You can access Swagger UI at:
+**https://user-management-service-task-1.onrender.com/swagger-ui/index.html**
 
 ### Environment Profiles
 
-The project has two profiles:
+**1. dev (Local IntelliJ Development)**
+- Simplified configuration via `application-dev.yml`
+- No Kafka or MailHog dependencies
+- Local PostgreSQL database
+- Swagger UI enabled
+- Debug-level logging
+- For rapid feature development and debugging
+- **Activated by:** Setting active profile to `dev` in IntelliJ run configuration
 
-1. **dev** (default): Local development with Docker Compose
-   - All services run in containers
-   - Kafka and MailHog are active
-   - Debug logging is enabled
+**2. default (Docker Development)**
+- Full configuration via `application.yml`
+- All services running (Kafka, MailHog, PostgreSQL)
+- Event-driven features enabled
+- Email testing with MailHog
+- INFO-level logging
+- For integration testing and team collaboration
+- **Activated by:** Running with Docker Compose
 
-2. **prod**: For production deployment
-   - Kafka is disabled (`exclude: KafkaAutoConfiguration`)
-   - Database credentials come from environment variables
-   - Logging is minimized (WARN level)
-
-### Required Environment Variables (Prod)
-
-```bash
-DB_URL=jdbc:postgresql://prod-db-host:5432/dbname
-DB_USER=prod_user
-DB_PASS=secure_password
-SWAGGER_SERVER_URL=https://your-domain.com
-```
-
-### Dockerfile Multi-Stage Build
-
-```dockerfile
-# Stage 1: Build
-FROM eclipse-temurin:21-jdk AS builder
-# ... gradle build operations
-
-# Stage 2: Runtime
-FROM eclipse-temurin:21-jre AS runtime
-COPY --from=builder /app/build/libs/*.jar app.jar
-```
-
-**Benefits**:
-- **Small Image**: Final image contains JRE, not JDK + build tools
-- **Security**: Source code is not in the final image
-- **Speed**: Build artifacts are cached
-
-### Logging
-
-In prod, logs are written to file:
-```yaml
-logging:
-  file:
-    name: logs/user-management.log
-```
-
-Volume mounted in Docker Compose:
-```yaml
-volumes:
-  - ./logs:/app/logs
-```
-
-This way, logs are not lost even if the container restarts.
+**3. prod (Production)**
+- Production configuration
+- Kafka and MailHog completely disabled
+- Database credentials from environment variables
+- WARN-level logging for reduced volume
+- Optimized for performance and security
+- File-based logging with rotation
+- **Activated by:** Setting `SPRING_PROFILES_ACTIVE=prod`
 
 ---
 
-## Future Enhancements
 
-This project is a basic user management system. Features that can be added in the future:
 
-* **Authentication & Authorization**: JWT token-based security
-* **Role-Based Access Control**: Admin, moderator, user roles
-* **Email Verification**: Email verification after registration
-* **Password Reset**: Password reset flow
-* **Account Locking**: Account locking after failed login attempts
-* **Audit Log**: Recording all user operations
-* **Rate Limiting**: To prevent API abuse
-* **Caching**: Caching frequent queries with Redis
-* **API Gateway**: Routing and authentication in microservice architecture
+## Contact
 
----
-
-This README explains all aspects of the project in detail. If you have any questions or topics you'd like to add, please let me know!
-
-# User-Management-Service
-# User-Management-Service - Core Architecture Diagram
+[mahammadalibayli@gmail.com]
 
 ```mermaid
 flowchart TD
